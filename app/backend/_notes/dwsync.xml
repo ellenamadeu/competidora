@@ -74,6 +74,6 @@
 <file name="get_agendamento_by_id.php" server="ftp.competidora.com.br/public_html/" local="133984594995455229" remote="133984594800000000" Dst="0" />
 <file name="update_agendamento.php" server="ftp.competidora.com.br/public_html/" local="133984595594626380" remote="133984595400000000" Dst="0" />
 <file name="delete_agendamento.php" server="ftp.competidora.com.br/public_html/" local="133984596150555458" remote="133984596000000000" Dst="0" />
-<file name="get_orcamento_data.php" server="ftp.competidora.com.br/public_html/" local="133983628285680148" remote="133985217000000000" Dst="0" />
-<file name="get_pedido_acompanhamento.php" server="ftp.competidora.com.br/public_html/" local="133985280678721879" remote="133985280600000000" Dst="0" />
+<file name="get_pedido_acompanhamento.php" server="ftp.competidora.com.br/public_html/" local="133989619073934511" remote="133989618600000000" Dst="0" />
+<file name="update_pedido_status_titulo.php" server="ftp.competidora.com.br/public_html/" local="133990402637650284" remote="133990402200000000" Dst="0" />
 </dwsync>

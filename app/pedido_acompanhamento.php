@@ -94,6 +94,62 @@
             font-weight: 700;
             color: #E5E7EB;
         }
+        /* Estilos para o checkbox estilizado */
+        .styled-checkbox-container {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: default;
+            user-select: none;
+            width: 100%;
+        }
+        .styled-checkbox-container input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            cursor: default;
+            height: 0;
+            width: 0;
+        }
+        .styled-checkbox-checkmark {
+            height: 24px;
+            width: 24px;
+            background-color: #4B5563;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+            flex-shrink: 0;
+        }
+        .styled-checkbox-container input[type="checkbox"]:checked ~ .styled-checkbox-checkmark {
+            background-color: #25D366;
+        }
+        .styled-checkbox-checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+        .styled-checkbox-container input[type="checkbox"]:checked ~ .styled-checkbox-checkmark:after {
+            display: block;
+            width: 8px;
+            height: 14px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            transform: rotate(45deg);
+        }
+        /* Estilos para o Bloco de Valores */
+        .values-list .detail-item {
+            border-bottom: none;
+            padding: 4px 0;
+        }
+        .values-list .detail-item .detail-value {
+            justify-content: flex-end;
+            text-align: right;
+        }
+        .values-list .detail-item .detail-label {
+            flex-grow: 1;
+            justify-content: flex-start;
+        }
     </style>
 </head>
 <body class="text-gray-200 text-sm md:text-base"> 
@@ -210,24 +266,67 @@
                             </div>
                         `;
 
-                        // --- Bloco 2: Dados do Cliente (Visão Limitada para o Cliente) ---
-                        htmlContent += `
-                            <div class="bg-gray-700 p-3 rounded-lg shadow mb-6">
-                                <h3 class="detail-section-title">Dados do Cliente</h3>
+                        // --- Bloco 2: Dados do Cliente (Visão Limitada e Condicional) ---
+                        let clienteHtml = '';
+                        if (pedido.cliente_nome) {
+                            clienteHtml += `
                                 <div class="detail-item">
-                                    <span class="detail-label"><i class="fas fa-user"></i>Nome:</span>
-                                    <span class="detail-value">${pedido.cliente_nome || 'N/A'}</span>
+                                    <span class="detail-label"><i class="fas fa-user"></i></span>
+                                    <span class="detail-value">${pedido.cliente_nome}</span>
                                 </div>
+                            `;
+                        }
+                        if (pedido.cliente_email) {
+                            clienteHtml += `
                                 <div class="detail-item">
-                                    <span class="detail-label"><i class="fas fa-envelope"></i>Email:</span>
-                                    <span class="detail-value">${pedido.cliente_email || 'N/A'}</span>
+                                    <span class="detail-label"><i class="fas fa-envelope"></i></span>
+                                    <span class="detail-value">${pedido.cliente_email}</span>
                                 </div>
+                            `;
+                        }
+                        if (pedido.cliente_telefone) {
+                            clienteHtml += `
                                 <div class="detail-item">
-                                    <span class="detail-label"><i class="fas fa-phone"></i>Telefone:</span>
-                                    <span class="detail-value">${pedido.cliente_telefone || 'N/A'}</span>
+                                    <span class="detail-label"><i class="fas fa-phone"></i></span>
+                                    <span class="detail-value">${pedido.cliente_telefone}</span>
                                 </div>
-                            </div>
-                        `;
+                            `;
+                        }
+                        if (pedido.cliente_telefone2) {
+                            clienteHtml += `
+                                <div class="detail-item">
+                                    <span class="detail-label"><i class="fas fa-phone"></i></span>
+                                    <span class="detail-value">${pedido.cliente_telefone2}</span>
+                                </div>
+                            `;
+                        }
+                        if (pedido.cliente_telefone3) {
+                            clienteHtml += `
+                                <div class="detail-item">
+                                    <span class="detail-label"><i class="fas fa-phone"></i></span>
+                                    <span class="detail-value">${pedido.cliente_telefone3}</span>
+                                </div>
+                            `;
+                        }
+
+                        const enderecoCompleto = [pedido.cliente_endereco, pedido.cliente_bairro].filter(Boolean).join(' - ');
+                        if (enderecoCompleto) {
+                            clienteHtml += `
+                                <div class="detail-item">
+                                    <span class="detail-label"><i class="fas fa-map-marker-alt"></i></span>
+                                    <span class="detail-value">${enderecoCompleto}</span>
+                                </div>
+                            `;
+                        }
+
+                        if (clienteHtml) {
+                            htmlContent += `
+                                <div class="bg-gray-700 p-3 rounded-lg shadow mb-6">
+                                    <h3 class="detail-section-title">Dados do Cliente</h3>
+                                    ${clienteHtml}
+                                </div>
+                            `;
+                        }
 
                         // --- Seção Itens do Pedido (Tabela com ajustes) ---
                         htmlContent += `
@@ -317,8 +416,41 @@
                             </div>
                         `;
                         
-                        // O bloco de agendamentos para clientes não será incluído nesta página,
-                        // a menos que especificado de forma diferente.
+                        // --- Bloco 5: Agendamentos ---
+                        htmlContent += `
+                            <div class="bg-gray-700 p-3 rounded-lg shadow mb-6">
+                                <h3 class="detail-section-title">
+                                    <span>Agendamentos</span>
+                                </h3>
+                                ${agendamentos.length > 0 ? `
+                                    <div class="overflow-x-auto">
+                                        <table class="items-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Data/Hora</th>
+                                                    <th>OS</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                ${agendamentos.map(ag => `
+                                                    <tr>
+                                                        <td>${formatDate(ag.data_agendamento)} - ${ag.hora_agendamento_nome || 'N/A'}</td>
+                                                        <td>${ag.ordem_nome || 'N/A'}</td>
+                                                        <td class="text-center">
+                                                            <label class="styled-checkbox-container">
+                                                                <input type="checkbox" ${ag.status_agendamento == 1 ? 'checked' : ''} disabled>
+                                                                <span class="styled-checkbox-checkmark"></span>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                `).join('')}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                ` : '<p class="text-gray-400">Nenhum agendamento registrado para este pedido.</p>'}
+                            </div>
+                        `;
 
                         orderDetailsContent.innerHTML = htmlContent;
 

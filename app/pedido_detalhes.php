@@ -339,9 +339,16 @@
                 </div>
 
                 <div class="mt-8 flex justify-end gap-4">
-                    <!-- Botões de ação (Editar/Excluir podem ser adicionados futuramente) -->
                     <a href="pedidos.php" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
-                        Voltar para a Lista de Pedidos
+                        Voltar
+                    </a>
+                    <!-- Botão de Acompanhamento -->
+                    <a id="acompanhamentoBtn" href="#" target="_blank" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
+                        Acompanhamento
+                    </a>
+                    <!-- Botão de Impressão -->
+                    <a id="printBtn" href="#" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
+                        Imprimir
                     </a>
                 </div>
             </div>
@@ -349,10 +356,43 @@
 
     </div>
 
+    <!-- Modal para Editar Status e Título -->
+    <div id="updateStatusTituloModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="modal-close-btn" id="closeUpdateStatusTituloModalBtn">×</span>
+            <h3 class="text-xl font-bold text-white mb-4">Alterar Pedido</h3>
+            <div id="updateStatusTituloModalMessage" class="py-2 px-3 rounded-lg text-center hidden mb-4"></div>
+
+            <form id="updateStatusTituloForm">
+                <input type="hidden" id="updateStatusTituloModalOrderId" name="id_pedido">
+
+                <div class="modal-form-group">
+                    <label for="updateTitulo">Título:</label>
+                    <input type="text" id="updateTitulo" name="titulo" required>
+                </div>
+                <div class="modal-form-group">
+                    <label for="updateStatus">Status:</label>
+                    <select id="updateStatus" name="status" required>
+                        <option value="">Carregando...</option>
+                    </select>
+                </div>
+
+                <div class="modal-buttons">
+                    <button type="button" id="cancelUpdateStatusTituloBtn" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
+                        Salvar Alterações
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Modal para Novo Agendamento -->
     <div id="newAppointmentModal" class="modal hidden">
         <div class="modal-content">
-            <span class="modal-close-btn" id="closeNewAppointmentModalBtn">&times;</span>
+            <span class="modal-close-btn" id="closeNewAppointmentModalBtn">×</span>
             <h3 class="text-xl font-bold text-white mb-4">Novo Agendamento</h3>
             <div id="newAppointmentModalMessage" class="py-2 px-3 rounded-lg text-center hidden mb-4"></div>
 
@@ -410,7 +450,7 @@
     <!-- Modal para Atualizar Agendamento (NOVO) -->
     <div id="updateAppointmentModal" class="modal hidden">
         <div class="modal-content">
-            <span class="modal-close-btn" id="closeUpdateAppointmentModalBtn">&times;</span>
+            <span class="modal-close-btn" id="closeUpdateAppointmentModalBtn">×</span>
             <h3 class="text-xl font-bold text-white mb-4">Atualizar Agendamento</h3>
             <div id="updateAppointmentModalMessage" class="py-2 px-3 rounded-lg text-center hidden mb-4"></div>
 
@@ -439,6 +479,7 @@
                     <select id="updateAppointmentResponsible" name="responsavel" required>
                         <option value="">Carregando Responsáveis...</option>
                     </select>
+
                 </div>
                 <div class="modal-form-group">
                     <label for="updateAppointmentInstruction">Instruções:</label>
@@ -470,7 +511,7 @@
     <!-- Modal para Novo Item -->
     <div id="newItemModal" class="modal hidden">
         <div class="modal-content">
-            <span class="modal-close-btn" id="closeNewItemModalBtn">&times;</span>
+            <span class="modal-close-btn" id="closeNewItemModalBtn">×</span>
             <h3 class="text-xl font-bold text-white mb-4">Novo Item do Pedido</h3>
             <div id="newItemModalMessage" class="py-2 px-3 rounded-lg text-center hidden mb-4"></div>
 
@@ -560,7 +601,7 @@
     <!-- Modal para Atualizar Item -->
     <div id="updateItemModal" class="modal hidden">
         <div class="modal-content">
-            <span class="modal-close-btn" id="closeUpdateItemModalBtn">&times;</span>
+            <span class="modal-close-btn" id="closeUpdateItemModalBtn">×</span>
             <h3 class="text-xl font-bold text-white mb-4">Atualizar Item do Pedido</h3>
             <div id="updateItemModalMessage" class="py-2 px-3 rounded-lg text-center hidden mb-4"></div>
 
@@ -636,6 +677,7 @@
                     </div>
                 </div>
 
+
                 <div class="modal-buttons">
                     <!-- Botão Excluir Item adicionado aqui -->
                     <button type="button" id="deleteItemBtn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
@@ -655,7 +697,7 @@
     <!-- Modal para Novo Pagamento -->
     <div id="newPaymentModal" class="modal hidden">
         <div class="modal-content">
-            <span class="modal-close-btn" id="closeNewPaymentModalBtn">&times;</span>
+            <span class="modal-close-btn" id="closeNewPaymentModalBtn">×</span>
             <h3 class="text-xl font-bold text-white mb-4">Novo Pagamento</h3>
             <div id="paymentModalMessage" class="py-2 px-3 rounded-lg text-center hidden mb-4"></div>
 
@@ -688,7 +730,7 @@
     <!-- Modal para Atualizar Pagamento -->
     <div id="updatePaymentModal" class="modal hidden">
         <div class="modal-content">
-            <span class="modal-close-btn" id="closeUpdatePaymentModalBtn">&times;</span>
+            <span class="modal-close-btn" id="closeUpdatePaymentModalBtn">×</span>
             <h3 class="text-xl font-bold text-white mb-4">Atualizar Pagamento</h3>
             <div id="updatePaymentModalMessage" class="py-2 px-3 rounded-lg text-center hidden mb-4"></div>
 
@@ -751,8 +793,9 @@
             document.getElementById('newPaymentModal').classList.add('hidden'); 
             document.getElementById('updatePaymentModal').classList.add('hidden'); 
             document.getElementById('newAppointmentModal').classList.add('hidden');
-            document.getElementById('updateAppointmentModal').classList.add('hidden'); // NOVO: Oculta o modal de atualização de agendamento
+            document.getElementById('updateAppointmentModal').classList.add('hidden');
             document.getElementById('confirmationModal').classList.add('hidden');
+            document.getElementById('updateStatusTituloModal').classList.add('hidden');
 
 
             const orderTitleHeader = document.getElementById('orderTitleHeader');
@@ -848,7 +891,7 @@
             const appointmentInstructionTextarea = document.getElementById('appointmentInstruction');
             const appointmentStatusCheckbox = document.getElementById('appointmentStatus');
 
-            // NOVO: Elementos do Modal de Atualização de Agendamento
+            // Elementos do Modal de Atualização de Agendamento
             const updateAppointmentModal = document.getElementById('updateAppointmentModal');
             const closeUpdateAppointmentModalBtn = document.getElementById('closeUpdateAppointmentModalBtn');
             const cancelUpdateAppointmentBtn = document.getElementById('cancelUpdateAppointmentBtn');
@@ -863,6 +906,16 @@
             const updateAppointmentInstructionTextarea = document.getElementById('updateAppointmentInstruction');
             const updateAppointmentStatusCheckbox = document.getElementById('updateAppointmentStatus');
             const deleteAppointmentBtn = document.getElementById('deleteAppointmentBtn');
+
+            // Elementos do Modal de Atualização de Status/Título
+            const updateStatusTituloModal = document.getElementById('updateStatusTituloModal');
+            const closeUpdateStatusTituloModalBtn = document.getElementById('closeUpdateStatusTituloModalBtn');
+            const cancelUpdateStatusTituloBtn = document.getElementById('cancelUpdateStatusTituloBtn');
+            const updateStatusTituloForm = document.getElementById('updateStatusTituloForm');
+            const updateStatusTituloModalOrderIdInput = document.getElementById('updateStatusTituloModalOrderId');
+            const updateTituloInput = document.getElementById('updateTitulo');
+            const updateStatusSelect = document.getElementById('updateStatus');
+            const updateStatusTituloModalMessageDiv = document.getElementById('updateStatusTituloModalMessage');
 
             // Elementos do Modal de Confirmação
             const confirmationModal = document.getElementById('confirmationModal');
@@ -970,62 +1023,87 @@
                         // --- Bloco 1: ID do Pedido e Status ---
                         htmlContent += `
                             <div class="bg-gray-700 p-3 rounded-lg shadow mb-6">
-                                <div class="detail-item"><span class="detail-label">ID do Pedido:</span><span class="detail-value">${pedido.id_pedido || 'N/A'}</span></div>
-                                <div class="detail-item"><span class="detail-label">Status:</span><span class="detail-value">${pedido.status_nome || 'N/A'}</span></div>
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <div class="detail-item"><span class="detail-label">ID do Pedido:</span><span class="detail-value">${pedido.id_pedido || 'N/A'}</span></div>
+                                        <div class="detail-item"><span class="detail-label">Status:</span><span class="detail-value">${pedido.status_nome || 'N/A'}</span></div>
+                                    </div>
+                                    <button id="openUpdateStatusTituloModalBtn" class="text-gray-400 hover:text-white transition-colors">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </button>
+                                </div>
                             </div>
                         `;
 
                         // --- Bloco 2: Dados do Cliente ---
-                        const getWhatsAppLink = (ddd, phone) => {
+                        let clienteHtml = '';
+
+                        if (pedido.cliente_nome) {
+                            const nomeContato = [pedido.cliente_nome, pedido.cliente_contato].filter(Boolean).join(' - ');
+                            clienteHtml += `
+                                <div class="detail-item">
+                                    <span class="detail-label"><i class="fas fa-user"></i></span>
+                                    <span class="detail-value">
+                                        <a href="detalhes_cliente.php?id=${pedido.id_cliente}" class="text-blue-400 hover:underline">${nomeContato}</a>
+                                    </span>
+                                </div>
+                            `;
+                        }
+
+                        const createWhatsAppLink = (ddd, phone) => {
                             if (!phone) return '';
                             const cleanPhone = phone.replace(/\D/g, '');
                             const finalDdd = ddd || '21';
-                            return `<a href="https://wa.me/55${finalDdd}${cleanPhone}" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i></a>`;
-                        };
-                        const getGoogleMapsLink = (address, neighborhood) => {
-                            if (!address && !neighborhood) return '';
-                            const destination = encodeURIComponent(`${address || ''} ${neighborhood || ''}, Rio de Janeiro, Brasil`);
-                            return `<a href="https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving" target="_blank" class="map-btn"><i class="fas fa-map-marked-alt"></i></a>`;
+                            return `<a href="https://wa.me/55${finalDdd}${cleanPhone}" target="_blank" class="text-green-400 hover:underline">${phone}</a>`;
                         };
 
-                        htmlContent += `
-                            <div class="bg-gray-700 p-3 rounded-lg shadow mb-6">
-                                <h3 class="detail-section-title">Dados do Cliente</h3>
-                                <div class="detail-item">
-                                    <span class="detail-label"><i class="fas fa-user"></i></span>
-                                    <span class="detail-value">${pedido.cliente_nome || 'N/A'} - ${pedido.cliente_contato || 'N/A'}</span>
-                                </div>
+                        if (pedido.cliente_telefone) {
+                            clienteHtml += `
                                 <div class="detail-item">
                                     <span class="detail-label"><i class="fas fa-phone"></i></span>
-                                    <span class="detail-value">
-                                        ${pedido.cliente_telefone || 'N/A'} ${getWhatsAppLink(pedido.cliente_ddd, pedido.cliente_telefone)}
-                                    </span>
+                                    <span class="detail-value">${createWhatsAppLink(pedido.cliente_ddd, pedido.cliente_telefone)}</span>
                                 </div>
-                                ${pedido.cliente_telefone2 ? `
+                            `;
+                        }
+                        if (pedido.cliente_telefone2) {
+                            clienteHtml += `
                                 <div class="detail-item">
                                     <span class="detail-label"><i class="fas fa-phone"></i></span>
-                                    <span class="detail-value">
-                                        ${pedido.cliente_telefone2} ${getWhatsAppLink(pedido.cliente_ddd, pedido.cliente_telefone2)}
-                                    </span>
+                                    <span class="detail-value">${createWhatsAppLink(pedido.cliente_ddd, pedido.cliente_telefone2)}</span>
                                 </div>
-                                ` : ''}
-                                ${pedido.cliente_telefone3 ? `
+                            `;
+                        }
+                        if (pedido.cliente_telefone3) {
+                            clienteHtml += `
                                 <div class="detail-item">
                                     <span class="detail-label"><i class="fas fa-phone"></i></span>
-                                    <span class="detail-value">
-                                        ${pedido.cliente_telefone3} ${getWhatsAppLink(pedido.cliente_ddd, pedido.cliente_telefone3)}
-                                    </span>
+                                    <span class="detail-value">${createWhatsAppLink(pedido.cliente_ddd, pedido.cliente_telefone3)}</span>
                                 </div>
-                                ` : ''}
+                            `;
+                        }
+
+                        const fullAddress = [pedido.cliente_endereco, pedido.cliente_bairro].filter(Boolean).join(' - ');
+                        if (fullAddress) {
+                            const destination = encodeURIComponent(`${fullAddress}, Rio de Janeiro, Brasil`);
+                            clienteHtml += `
                                 <div class="detail-item">
                                     <span class="detail-label"><i class="fas fa-map-marker-alt"></i></span>
                                     <span class="detail-value">
-                                        <span class="address-text">${pedido.cliente_endereco || 'N/A'} - ${pedido.cliente_bairro || 'N/A'}</span>
-                                        ${getGoogleMapsLink(pedido.cliente_endereco, pedido.cliente_bairro)}
+                                        <a href="https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving" target="_blank" class="text-blue-400 hover:underline">${fullAddress}</a>
                                     </span>
                                 </div>
-                            </div>
-                        `;
+                            `;
+                        }
+
+                        if (clienteHtml) {
+                            htmlContent += `
+                                <div class="bg-gray-700 p-3 rounded-lg shadow mb-6">
+                                    <h3 class="detail-section-title">Dados do Cliente</h3>
+                                    ${clienteHtml}
+                                </div>
+                            `;
+                        }
+
 
                         // --- Seção Itens do Pedido (Tabela com ajustes) ---
                         htmlContent += `
@@ -1168,6 +1246,26 @@
                         orderDetailsContent.innerHTML = htmlContent;
 
                         // --- ADICIONANDO EVENT LISTENERS APÓS O HTML SER INSERIDO ---
+                        const acompanhamentoBtn = document.getElementById('acompanhamentoBtn');
+                        if (acompanhamentoBtn) {
+                            acompanhamentoBtn.href = `pedido_acompanhamento.php?id=${orderId}`;
+                        }
+
+                        const printBtn = document.getElementById('printBtn');
+                        if (printBtn) {
+                            printBtn.href = `pedido_print.php?id=${orderId}`;
+                        }
+
+                        // Event listener para o botão "Alterar" de Status/Título
+                        const openUpdateStatusTituloModalBtn = document.getElementById('openUpdateStatusTituloModalBtn');
+                        if(openUpdateStatusTituloModalBtn) {
+                            openUpdateStatusTituloModalBtn.addEventListener('click', async () => {
+                                updateStatusTituloModalOrderIdInput.value = orderId;
+                                updateTituloInput.value = pedido.titulo || '';
+                                await loadStatusDropdown(updateStatusSelect, pedido.status);
+                                updateStatusTituloModal.classList.remove('hidden');
+                            });
+                        }
                         
                         // Event listener para o botão "+" de Agendamento
                         const currentAddAppointmentBtn = document.getElementById('addAppointmentBtn');
@@ -1265,6 +1363,28 @@
                     loadingMessage.style.display = 'none';
                     errorMessage.style.display = 'block';
                     orderTitleHeader.textContent = 'Erro ao Carregar';
+                }
+            };
+
+            // Função para carregar os status no dropdown
+            const loadStatusDropdown = async (targetSelect, selectedValue = null) => {
+                try {
+                    const response = await fetch('backend/get_orc_status.php');
+                    if (!response.ok) throw new Error('Erro ao carregar status');
+                    const statusList = await response.json();
+                    targetSelect.innerHTML = '<option value="">Selecione o Status</option>';
+                    statusList.forEach(status => {
+                        const option = document.createElement('option');
+                        option.value = status.id_status;
+                        option.textContent = status.status;
+                        if (selectedValue && selectedValue == status.id_status) {
+                            option.selected = true;
+                        }
+                        targetSelect.appendChild(option);
+                    });
+                } catch (error) {
+                    console.error(error);
+                    targetSelect.innerHTML = '<option value="">Erro ao carregar</option>';
                 }
             };
 
@@ -1400,6 +1520,7 @@
                     }
                     const descricoes = await response.json();
                     descricoes.forEach(desc => {
+
                         const option = document.createElement('option');
                         option.value = desc.id_descricao;
                         option.textContent = desc.descricao;
@@ -1749,6 +1870,10 @@
             closeUpdateAppointmentModalBtn.addEventListener('click', () => { updateAppointmentModal.classList.add('hidden'); updateAppointmentForm.reset(); });
             cancelUpdateAppointmentBtn.addEventListener('click', () => { updateAppointmentModal.classList.add('hidden'); updateAppointmentForm.reset(); });
 
+            // Event Listeners para o modal de atualização de Status/Título
+            closeUpdateStatusTituloModalBtn.addEventListener('click', () => { updateStatusTituloModal.classList.add('hidden'); });
+            cancelUpdateStatusTituloBtn.addEventListener('click', () => { updateStatusTituloModal.classList.add('hidden'); });
+
 
             // Fechar modais ao clicar fora
             window.addEventListener('click', (event) => {
@@ -1759,6 +1884,7 @@
                 if (event.target === newAppointmentModal) { newAppointmentModal.classList.add('hidden'); newAppointmentForm.reset(); }
                 if (event.target === updateAppointmentModal) { updateAppointmentModal.classList.add('hidden'); updateAppointmentForm.reset(); } // NOVO: Fecha o modal de atualização
                 if (event.target === confirmationModal) { confirmationModal.classList.add('hidden'); pendingAction = null; }
+                if (event.target === updateStatusTituloModal) { updateStatusTituloModal.classList.add('hidden'); }
             });
 
             // Lidar com o envio do formulário de Novo Pagamento
@@ -1958,51 +2084,41 @@
                 }
             });
             
-            // NOVO: Lidar com o envio do formulário de Atualização de Agendamento
-            updateAppointmentForm.addEventListener('submit', async (event) => {
+            // Lidar com o envio do formulário de Atualização de Status/Título
+            updateStatusTituloForm.addEventListener('submit', async (event) => {
                 event.preventDefault();
+                updateStatusTituloModalMessageDiv.classList.add('hidden');
 
-                updateAppointmentModalMessageDiv.classList.add('hidden');
-
-                const formData = new FormData(updateAppointmentForm);
-                const agendamentoData = {
-                    id_agendamento: formData.get('id_agendamento'),
+                const formData = new FormData(updateStatusTituloForm);
+                const pedidoData = {
                     id_pedido: formData.get('id_pedido'),
-                    data_agendamento: formData.get('data_agendamento'),
-                    hora_agendamento: formData.get('hora_agendamento'),
-                    ordem: formData.get('ordem'),
-                    responsavel: formData.get('responsavel'),
-                    instrucao: formData.get('instrucao'),
-                    status_agendamento: updateAppointmentStatusCheckbox.checked ? 1 : 0
+                    titulo: formData.get('titulo'),
+                    status: formData.get('status')
                 };
-                
-                try {
-                    const response = await fetch('backend/update_agendamento.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(agendamentoData)
-                    });
 
+                try {
+                    const response = await fetch('backend/update_pedido_status_titulo.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(pedidoData)
+                    });
                     const result = await response.json();
 
                     if (result.success) {
-                        updateAppointmentModalMessageDiv.textContent = result.message;
-                        updateAppointmentModalMessageDiv.className = 'py-2 px-3 rounded-lg text-center bg-green-800 text-white block mb-4';
-                        updateAppointmentForm.reset();
+                        updateStatusTituloModalMessageDiv.textContent = result.message;
+                        updateStatusTituloModalMessageDiv.className = 'py-2 px-3 rounded-lg text-center bg-green-800 text-white block mb-4';
                         setTimeout(() => {
-                            updateAppointmentModal.classList.add('hidden');
+                            updateStatusTituloModal.classList.add('hidden');
                             loadOrderDetails();
                         }, 1500);
                     } else {
-                        updateAppointmentModalMessageDiv.textContent = result.message || result.error || 'Erro ao atualizar agendamento.';
-                        updateAppointmentModalMessageDiv.className = 'py-2 px-3 rounded-lg text-center bg-red-800 text-white block mb-4';
+                        updateStatusTituloModalMessageDiv.textContent = result.message || 'Erro ao atualizar.';
+                        updateStatusTituloModalMessageDiv.className = 'py-2 px-3 rounded-lg text-center bg-red-800 text-white block mb-4';
                     }
                 } catch (error) {
-                    console.error('Erro ao enviar atualização de agendamento:', error);
-                    updateAppointmentModalMessageDiv.textContent = 'Ocorreu um erro ao tentar atualizar o agendamento.';
-                    updateAppointmentModalMessageDiv.className = 'py-2 px-3 rounded-lg text-center bg-red-800 text-white block mb-4';
+                    console.error('Erro ao atualizar pedido:', error);
+                    updateStatusTituloModalMessageDiv.textContent = 'Erro de conexão.';
+                    updateStatusTituloModalMessageDiv.className = 'py-2 px-3 rounded-lg text-center bg-red-800 text-white block mb-4';
                 }
             });
 

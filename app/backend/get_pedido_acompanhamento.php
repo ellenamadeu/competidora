@@ -2,6 +2,7 @@
 // backend/get_pedido_acompanhamento.php
 // Este script busca os dados de um pedido específico para a página de acompanhamento do cliente.
 // Ele retorna apenas informações relevantes para o cliente, sem dados sensíveis de contato interno.
+// Versão atualizada para incluir agendamentos e mais detalhes do cliente.
 
 header('Content-Type: application/json');
 
@@ -34,6 +35,10 @@ try {
             c.nome AS cliente_nome, 
             c.email AS cliente_email,
             c.telefone AS cliente_telefone, 
+            c.telefone2 AS cliente_telefone2,
+            c.telefone3 AS cliente_telefone3,
+            c.endereco AS cliente_endereco,
+            c.bairro AS cliente_bairro,
             s.status AS status_nome
         FROM 
             pedidos p
@@ -103,6 +108,29 @@ try {
     $stmtPagamentos = $pdo->prepare($sqlPagamentos);
     $stmtPagamentos->execute([$pedidoId]);
     $pedidoDetalhes['pagamentos'] = $stmtPagamentos->fetchAll(PDO::FETCH_ASSOC);
+
+    // --- 4. Agendamentos do Pedido ---
+    $sqlAgendamentos = "
+        SELECT 
+            a.data_agendamento,
+            ah.hora AS hora_agendamento_nome,
+            ao.ordem AS ordem_nome,
+            a.status_agendamento
+        FROM 
+            agendamento a
+        LEFT JOIN
+            agendamento_hora ah ON a.hora_agendamento = ah.id_aghora
+        LEFT JOIN
+            agendamento_ordem ao ON a.ordem = ao.id_ordem
+        WHERE 
+            a.id_pedido = ? 
+        ORDER BY a.data_agendamento DESC, ah.hora ASC
+
+    ";
+    $stmtAgendamentos = $pdo->prepare($sqlAgendamentos);
+    $stmtAgendamentos->execute([$pedidoId]); 
+    $pedidoDetalhes['agendamentos'] = $stmtAgendamentos->fetchAll(PDO::FETCH_ASSOC);
+
 
     echo json_encode($pedidoDetalhes);
 
