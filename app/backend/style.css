@@ -1,0 +1,84 @@
+/* style.css */
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #111827; /* bg-gray-900 */
+    color: #E5E7EB; /* text-gray-200 */
+}
+
+.main-container {
+    max-width: 1200px; /* Base for clientes.html */
+    margin: 0 auto;
+}
+
+/* Adjust max-width for detail/edit/new pages */
+@media (min-width: 640px) { /* Equivalent to sm: */
+    .main-container-small {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+}
+
+
+/* Estilo para tornar a div do cliente clicável e com feedback visual em clientes.html */
+.customer-card {
+    cursor: pointer;
+}
+.customer-card:hover {
+    background-color: #374151; /* gray-700 */
+}
+
+/* Estilos para detalhes do cliente (detalhes_cliente.html) */
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #374151; /* gray-700 */
+}
+.detail-item:last-child {
+    border-bottom: none;
+}
+.detail-label {
+    font-weight: 500;
+    color: #9CA3AF; /* gray-400 */
+    flex-shrink: 0; /* Prevents shrinking */
+    margin-right: 16px; /* Space between label and value */
+}
+.detail-value {
+    text-align: right;
+    flex-grow: 1; /* Allows value to take up remaining space */
+    word-wrap: break-word; /* Ensures long text wraps */
+}
+
+/* Estilos para formulários (editar_cliente.html, novo_cliente.html) */
+.form-group {
+    margin-bottom: 1rem;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #9CA3AF; /* gray-400 */
+}
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #374151; /* gray-700 */
+    border: 1px solid #4B5563; /* gray-600 */
+    border-radius: 0.5rem; /* rounded-lg */
+    color: #E5E7EB; /* text-gray-200 */
+    transition: all 0.2s ease-in-out;
+}
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #3B82F6; /* blue-500 */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); /* ring-blue-500 */
+}
+.form-group textarea {
+    min-height: 80px;
+    resize: vertical;
+}
