@@ -1,7 +1,7 @@
 <?php
 // pedido_detalhes.php
 // Página para exibir detalhes de um pedido específico.
-// Esta versão foi revisada para corrigir o problema de IDs 'undefined' nas modais de edição.
+// Esta versão foi revisada para permitir qualquer caractere nos campos Altura e Largura.
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -183,15 +183,21 @@
         }
 
         .styled-checkbox-checkmark {
-            height: 24px; /* Tamanho maior */
-            width: 24px; /* Tamanho maior */
+            position: relative; /* Garante que o pseudo-elemento ::after seja posicionado em relação a este span */
+            height: 24px;
+            width: 24px;
             background-color: #4B5563; /* gray-600 */
             border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: background-color 0.2s;
-            flex-shrink: 0; /* Garante que não encolha */
+            flex-shrink: 0;
+        }
+
+        /* Adiciona uma cor de fundo quando o checkbox está marcado */
+        .styled-checkbox-container input[type="checkbox"]:checked ~ .styled-checkbox-checkmark {
+            background-color: #3B82F6; /* blue-500 */
         }
 
         .styled-checkbox-checkmark:after {
@@ -202,10 +208,11 @@
 
         .styled-checkbox-container input[type="checkbox"]:checked ~ .styled-checkbox-checkmark:after {
             display: block;
-            left: 8px; /* Ajustado para tamanho maior */
-            top: 3px; /* Ajustado para tamanho maior */
-            width: 8px; /* Ajustado para novo tamanho */
-            height: 14px; /* Ajustado para novo tamanho */
+            /* Ajustes para centralizar melhor o 'check' */
+            left: 9px; 
+            top: 5px; 
+            width: 7px;
+            height: 12px;
             border: solid white;
             border-width: 0 3px 3px 0;
             transform: rotate(45deg);
@@ -368,7 +375,7 @@
 
                 <div class="modal-form-group">
                     <label for="updateTitulo">Título:</label>
-                    <input type="text" id="updateTitulo" name="titulo" required>
+                    <input type="text" id="updateTitulo" name="titulo">
                 </div>
                 <div class="modal-form-group">
                     <label for="updateStatus">Status:</label>
@@ -476,6 +483,7 @@
                 </div>
                 <div class="modal-form-group">
                     <label for="updateAppointmentResponsible">Responsável:</label>
+
                     <select id="updateAppointmentResponsible" name="responsavel" required>
                         <option value="">Carregando Responsáveis...</option>
                     </select>
@@ -523,11 +531,11 @@
                 <div class="flex flex-wrap gap-4 mb-4">
                     <div class="flex-1 min-w-[calc(33%-1rem)]">
                         <label for="itemAltura" class="block text-sm font-medium text-gray-400">Altura:</label>
-                        <input type="text" id="itemAltura" name="altura" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white" required maxlength="10">
+                        <input type="text" id="itemAltura" name="altura" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white">
                     </div>
                     <div class="flex-1 min-w-[calc(33%-1rem)]">
                         <label for="itemLargura" class="block text-sm font-medium text-gray-400">Largura:</label>
-                        <input type="text" id="itemLargura" name="largura" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white" required maxlength="10">
+                        <input type="text" id="itemLargura" name="largura" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white">
                     </div>
                     <div class="flex-1 min-w-[calc(33%-1rem)]">
                         <label for="itemQuantidade" class="block text-sm font-medium text-gray-400">Quantidade:</label>
@@ -614,11 +622,11 @@
                 <div class="flex flex-wrap gap-4 mb-4">
                     <div class="flex-1 min-w-[calc(33%-1rem)]">
                         <label for="updateItemAltura" class="block text-sm font-medium text-gray-400">Altura:</label>
-                        <input type="text" id="updateItemAltura" name="altura" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white" required maxlength="10">
+                        <input type="text" id="updateItemAltura" name="altura" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white">
                     </div>
                     <div class="flex-1 min-w-[calc(33%-1rem)]">
                         <label for="updateItemLargura" class="block text-sm font-medium text-gray-400">Largura:</label>
-                        <input type="text" id="updateItemLargura" name="largura" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white" required maxlength="10">
+                        <input type="text" id="updateItemLargura" name="largura" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white">
                     </div>
                     <div class="flex-1 min-w-[calc(33%-1rem)]">
                         <label for="updateItemQuantidade" class="block text-sm font-medium text-gray-400">Quantidade:</label>
@@ -1992,8 +2000,8 @@
                     espessura: formData.get('espessura'),
                     acabamento: formData.get('acabamento'),
                     acabamento2: formData.get('acabamento2'), 
-                    altura: cleanAndParse(formData.get('altura')), 
-                    largura: cleanAndParse(formData.get('largura')), 
+                    altura: formData.get('altura'), 
+                    largura: formData.get('largura'), 
                     quantidade: cleanAndParse(formData.get('quantidade')), 
                     valor_unitario: cleanAndParse(formData.get('valor_unitario')), 
                     valor_total: cleanAndParse(formData.get('valor_total')) 
@@ -2047,8 +2055,8 @@
                     espessura: formData.get('espessura'),
                     acabamento: formData.get('acabamento'),
                     acabamento2: formData.get('acabamento2'),
-                    altura: cleanAndParse(formData.get('altura')),
-                    largura: cleanAndParse(formData.get('largura')),
+                    altura: formData.get('altura'),
+                    largura: formData.get('largura'),
                     quantidade: cleanAndParse(formData.get('quantidade')),
                     valor_unitario: cleanAndParse(formData.get('valor_unitario')),
                     valor_total: cleanAndParse(formData.get('valor_total'))
