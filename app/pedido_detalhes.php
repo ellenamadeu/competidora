@@ -812,6 +812,18 @@
             const errorMessage = document.getElementById('errorMessage');
             const noOrderFoundMessage = document.getElementById('noOrderFound');
 
+            // --- NOVO: Mapa de ícones de status ---
+            const statusStyles = {
+                '1': { colorClass: 'status-gray', icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>` }, // 1. Novo
+                '2': { colorClass: 'status-gray', icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>` }, // 2. Medição
+                '3': { colorClass: 'status-yellow', icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.75A.75.75 0 013 4.5h.75m0 0a.75.75 0 00.75-.75V3.75m0 0A.75.75 0 003.75 3h-.75m0 0a.75.75 0 00-.75.75v.75m0 0A.75.75 0 003 6h.75M7.5 12h9M7.5 15h9M12 4.5v.75A.75.75 0 0111.25 6h-1.5a.75.75 0 01-.75-.75V4.5m3 0A.75.75 0 0011.25 3h-1.5a.75.75 0 00-.75.75v.75m3 0a.75.75 0 00.75-.75V3.75m0 0A.75.75 0 0012.75 3h-1.5a.75.75 0 00-.75.75v.75" /></svg>` }, // 3. Orçamento
+                '4': { colorClass: 'status-blue', icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.472-2.472a3.375 3.375 0 00-4.773-4.773L4.5 15.75l9.17 9.17 2.828-2.828-5.877-5.877z" /></svg>` }, // 4. Produção
+                '5': { colorClass: 'status-purple', icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" /></svg>` }, // 5. Cobrança
+                '6': { colorClass: 'status-green', icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>` }, // 6. Concluído
+                '7': { colorClass: 'status-red', icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>` }, // 7. Baixado
+                'default': { colorClass: 'status-gray', icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`}
+            };
+
             // Elementos do Modal de Novo Item
             const newItemModal = document.getElementById('newItemModal');
             const closeNewItemModalBtn = document.getElementById('closeNewItemModalBtn');
@@ -1012,6 +1024,7 @@
                         console.error('Erro HTTP na resposta de get_pedido_detalhes.php. Status:', response.status, 'Texto:', errorText);
                         throw new Error(`A resposta do servidor não foi bem-sucedida (${response.status}). Detalhes: ${errorText.substring(0, 200)}...`);
                     }
+
                     const data = await response.json();
                     console.log('Dados do pedido recebidos:', data); 
 
@@ -1026,25 +1039,26 @@
                         orderTitleHeader.textContent = `Pedido #${pedido.id_pedido} - ${pedido.titulo || 'Sem Título'}`;
                         currentClientId = pedido.id_cliente; // Armazena o ID do cliente
 
-                        let htmlContent = '';
-
-                        // --- Bloco 1: ID do Pedido e Status ---
-                        htmlContent += `
-                            <div class="bg-gray-700 p-3 rounded-lg shadow mb-6">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <div class="detail-item"><span class="detail-label">ID do Pedido:</span><span class="detail-value">${pedido.id_pedido || 'N/A'}</span></div>
-                                        <div id="status-line-clickable" class="detail-item cursor-pointer hover:bg-gray-600 rounded-md -mx-1 px-1">
-                                            <span class="detail-label">Status:</span>
-                                            <span class="detail-value">${pedido.status_nome || 'N/A'}</span>
-                                        </div>
+                        // --- ATUALIZAÇÃO DO BLOCO 1 ---
+                        const style = statusStyles[pedido.status] || statusStyles.default;
+                        let htmlContent = `
+                            <div class="bg-gray-700 p-4 rounded-lg shadow mb-6 flex justify-between items-center">
+                                <div id="status-line-clickable" class="flex items-center gap-4 cursor-pointer group">
+                                    <div class="w-14 h-14 rounded-full flex items-center justify-center ${style.colorClass} transition-transform group-hover:scale-110">
+                                        ${style.icon}
                                     </div>
-                                    <button id="openUpdateStatusTituloModalBtn" class="text-gray-400 hover:text-white transition-colors">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </button>
+                                    <div>
+                                        <span class="text-sm text-gray-400">Status</span>
+                                        <p class="text-lg font-bold text-white">${pedido.status_nome || 'N/A'}</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-sm text-gray-400">Data do Pedido</span>
+                                    <p class="text-lg font-semibold text-white">${formatDate(pedido.data_pedido)}</p>
                                 </div>
                             </div>
                         `;
+
 
                         // --- Bloco 2: Dados do Cliente ---
                         let clienteHtml = '';
@@ -1275,12 +1289,6 @@
                             await loadStatusDropdown(updateStatusSelect, pedido.status);
                             updateStatusTituloModal.classList.remove('hidden');
                         };
-
-                        // Event listener para o botão "Alterar" (ícone de lápis)
-                        const openUpdateStatusTituloModalBtn = document.getElementById('openUpdateStatusTituloModalBtn');
-                        if(openUpdateStatusTituloModalBtn) {
-                            openUpdateStatusTituloModalBtn.addEventListener('click', openStatusUpdateModal);
-                        }
                         
                         // Event listener para a linha de Status
                         const statusLineClickable = document.getElementById('status-line-clickable');
