@@ -156,7 +156,7 @@ body {
     text-align: left;
 }
 .orders-table th {
-    background-color: #374151; /* gray-700 */
+    background-color: #1E3A8A; /* Azul Marinho (blue-800) */
     font-weight: 600;
     color: #E5E7EB;
 }
@@ -438,4 +438,110 @@ body {
 /* Cor para agendamentos concluídos */
 .appointment-completed {
     background-color: #10B981 !important; /* Verde */
+}
+
+/* --- ESTILOS ESPECÍFICOS DE pedido_detalhes.php --- */
+.items-table th, .payments-table th, .orders-table th {
+    background-color: #1E3A8A; /* Azul Marinho (blue-800) */
+    font-weight: 600;
+    color: #E5E7EB;
+}
+
+.items-table, .payments-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+.items-table th, .items-table td, .payments-table th, .payments-table td {
+    padding: 0.75rem;
+    border: 1px solid #4B5563; /* gray-600 */
+    text-align: left;
+}
+.items-table tbody tr:nth-child(odd), .payments-table tbody tr:nth-child(odd) {
+    background-color: #1F2937; /* gray-800 */
+}
+.items-table tbody tr:nth-child(even), .payments-table tbody tr:nth-child(even) {
+    background-color: #111827; /* gray-900 */
+}
+.items-table tbody tr:hover, .payments-table tbody tr:hover {
+    background-color: #4B5563; /* gray-600 */
+    cursor: pointer; /* Indica que a linha é clicável */
+}
+.items-table .col-qt {
+    width: 50px;
+    text-align: center;
+}
+.payments-table th, .payments-table td {
+    text-align: center;
+}
+.values-list .detail-item {
+    border-bottom: none;
+    padding: 4px 0;
+}
+.values-list .detail-item .detail-value {
+    justify-content: flex-end;
+    text-align: right;
+}
+.values-list .detail-item .detail-label {
+    flex-grow: 1;
+    justify-content: flex-start;
+}
+.value-bold {
+    font-weight: 700;
+    color: #E5E7EB;
+}
+
+/* Responsive Table for Items on Small Screens */
+@media (max-width: 768px) {
+    .items-table thead {
+        display: none;
+    }
+    .items-table tr {
+        display: flex;
+        flex-wrap: wrap;
+        border: 1px solid #4B5563;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+        overflow: hidden;
+    }
+    .items-table td {
+        border: none;
+        position: relative;
+        padding: 0.5rem;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex-grow: 1;
+    }
+    .items-table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #9CA3AF; /* gray-400 */
+        margin-bottom: 0.25rem;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+    }
+
+    /* Linha 1: Produto */
+    .items-table td[data-label="Produto"] {
+        flex-basis: 100%;
+        text-align: left;
+        font-size: 1.1rem;
+        font-weight: bold;
+        background-color: #374151;
+        padding: 0.75rem;
+        align-items: flex-start;
+    }
+    .items-table td[data-label="Produto"]::before {
+        display: none; /* Esconde a label "Produto" */
+    }
+
+    /* Linha 2: Outros dados */
+    .items-table td:not([data-label="Produto"]) {
+        flex-basis: 20%; /* Divide o espaço entre os 5 itens restantes */
+        min-width: 60px;
+        border-top: 1px dashed #374151;
+    }
 }
