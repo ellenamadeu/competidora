@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { X, DollarSign, Calendar, Save, CreditCard } from 'lucide-react';
+import { X, Calendar, Save, CreditCard } from 'lucide-react';
 import { api } from '../lib/api';
 
 interface MetodoPagamento {

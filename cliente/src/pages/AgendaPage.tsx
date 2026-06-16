@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { 
-  Calendar, ChevronLeft, ChevronRight, User, 
-  ClipboardList, CheckCircle2, Clock, Search, 
+  Calendar, ChevronLeft, ChevronRight, 
+  ClipboardList, CheckCircle2, Clock, 
   MapPin, Ruler, Truck, Wrench, Box, Footprints, 
   Factory, Hammer, Filter, Plus, UserCheck
 } from 'lucide-react';

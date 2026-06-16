@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Wallet, ArrowUpRight, ArrowDownRight, Calendar, RefreshCw, AlertCircle } from 'lucide-react';
+import { Wallet, ArrowUpRight, ArrowDownRight, RefreshCw, AlertCircle } from 'lucide-react';
 import { api } from '../lib/api';
 
 interface Transaction {

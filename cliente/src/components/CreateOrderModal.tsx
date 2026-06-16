@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Search, User, Save, ShoppingCart } from 'lucide-react';
+import { X, Search, User, Save } from 'lucide-react';
 import { api } from '../lib/api';
 import { useNavigate } from 'react-router-dom';
 
