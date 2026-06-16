@@ -197,7 +197,7 @@ export default function ClientsPage() {
         }
       }
     } else {
-      window.location.href = 'http://localhost:3000/api/google/auth';
+      window.location.href = `${api.defaults.baseURL || 'http://localhost:3000/api'}/google/auth`;
     }
   };
 

@@ -177,7 +177,7 @@ export default function OrderDetailsPage() {
   const handleUpdateStatus = async () => {
     try {
       setIsSaving(true);
-      const targetUrl = `http://localhost:3000/api/pedidos/${id}`;
+      const targetUrl = `${api.defaults.baseURL || 'http://localhost:3000/api'}/pedidos/${id}`;
       console.log(`[DEBUG] Calling update: PUT ${targetUrl}`, {
         status: statusUpdateFields.status,
         titulo: statusUpdateFields.titulo || null
