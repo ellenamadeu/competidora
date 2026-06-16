@@ -1,0 +1,108 @@
+[
+  {
+    "id": 6,
+    "categoria_id": 5,
+    "nome": "Box de Canto com Vidro Incolor 8mm",
+    "descricao": "",
+    "ncm": "",
+    "sku": "BCINC",
+    "preco_venda": "260",
+    "unidade_medida": "M3",
+    "largura_maxima": null,
+    "altura_maxima": null,
+    "comprimento_maximo": null,
+    "status": true,
+    "criado_em": "2026-03-25T12:34:01.955Z",
+    "categoria": {
+      "id": 5,
+      "categoria_pai_id": 2,
+      "nome": "Box de Canto (L)",
+      "slug": "box-de-canto",
+      "criado_em": "2026-03-22T02:26:10.710Z"
+    },
+    "acabamentos": [],
+    "imagens": [
+      {
+        "id": 6,
+        "produto_id": 6,
+        "url": "/uploads/produtos/9fd2cf0190375a1a985dda296dd548b1-Box C1 incolor preto.png",
+        "principal": true
+      }
+    ],
+    "variacoes": [
+      {
+        "id": 15,
+        "produto_id": 6,
+        "nome": "Cor dos Acabamentos",
+        "opcao": "Branco",
+        "tipo_acrescimo": "VALOR",
+        "valor_acrescimo": "320"
+      },
+      {
+        "id": 16,
+        "produto_id": 6,
+        "nome": "Cor dos Acabamentos",
+        "opcao": "Branco",
+        "tipo_acrescimo": "VALOR",
+        "valor_acrescimo": "320"
+      },
+      {
+        "id": 17,
+        "produto_id": 6,
+        "nome": "Cor dos Acabamentos",
+        "opcao": "Alumínio Fosco",
+        "tipo_acrescimo": "VALOR",
+        "valor_acrescimo": "320"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "categoria_id": 4,
+    "nome": "Box Blindex Frontal Com Vidro Temperado 8mm",
+    "descricao": "",
+    "ncm": "",
+    "sku": "BFI",
+    "preco_venda": "689.99",
+    "unidade_medida": "M2",
+    "largura_maxima": null,
+    "altura_maxima": null,
+    "comprimento_maximo": null,
+    "status": true,
+    "criado_em": "2026-03-23T13:46:31.989Z",
+    "categoria": {
+      "id": 4,
+      "categoria_pai_id": 2,
+      "nome": "Box Frontal",
+      "slug": "box-frontal",
+      "criado_em": "2026-03-22T02:24:28.660Z"
+    },
+    "acabamentos": [],
+    "imagens": [
+      {
+        "id": 5,
+        "produto_id": 4,
+        "url": "/uploads/produtos/7e5f8ec136bf0c94e2843fce9dfadf8a-Box frontal incolor bc.png",
+        "principal": true
+      }
+    ],
+    "variacoes": [
+      {
+        "id": 11,
+        "produto_id": 4,
+        "nome": "Cor dos acabamentos",
+        "opcao": "Branco",
+        "tipo_acrescimo": "VALOR",
+        "valor_acrescimo": "240"
+      },
+      {
+        "id": 12,
+        "produto_id": 4,
+        "nome": "Cor dos acabamentos",
+        "opcao": "Preto",
+        "tipo_acrescimo": "VALOR",
+        "valor_acrescimo": "240"
+      }
+    ]
+  }
+]

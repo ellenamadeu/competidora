@@ -1,0 +1,18 @@
+prisma:query SELECT * FROM clientes WHERE id_cliente = 10194
+{
+  "id_cliente": 10194,
+  "nome": "Ellen Amadeu de Oliveira",
+  "contato": null,
+  "email": "",
+  "ddd": null,
+  "telefone": "21983246323",
+  "telefone2": "2133469818",
+  "telefone3": "21987618345",
+  "endereco": "Rua Plinio Barreto, 221",
+  "bairro": "Jardim America",
+  "cep": "",
+  "referencias": null,
+  "documento": "",
+  "observacoes": "",
+  "google_id": "people/c5757524817341930269"
+}

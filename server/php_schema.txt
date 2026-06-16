@@ -1,0 +1,132 @@
+Connected to NODE DB: competid4c3793e0_node
+
+Pedidos: 50432
+Itens: 79658
+Colunas Clientes: id_cliente, nome, contato, email, ddd, telefone, telefone2, telefone3, endereco, bairro, cep, referencias, documento, observacoes, google_id
+
+--- TABLE: acabamentos ---
+COL: id | int
+COL: categoria_id | int
+COL: produto_id | int
+COL: nome | varchar(191)
+COL: tipo_acrescimo | varchar(20)
+COL: valor | decimal(10,2)
+COL: ativo | tinyint(1)
+
+--- TABLE: agendamento ---
+COL: id_agendamento | int
+COL: id_pedido | int
+COL: data_agendamento | date
+COL: hora_agendamento | int
+COL: ordem | int
+COL: responsavel | int
+COL: instrucao | text
+COL: status_agendamento | int
+
+--- TABLE: categorias ---
+COL: id | int
+COL: categoria_pai_id | int
+COL: nome | varchar(191)
+COL: slug | varchar(191)
+COL: criado_em | datetime(3)
+
+--- TABLE: clientes ---
+COL: id_cliente | int
+COL: nome | varchar(150)
+COL: contato | varchar(30)
+COL: email | varchar(150)
+COL: ddd | tinyint
+COL: telefone | varchar(150)
+COL: telefone2 | varchar(150)
+COL: telefone3 | varchar(150)
+COL: endereco | text
+COL: bairro | varchar(150)
+COL: cep | varchar(150)
+COL: referencias | varchar(130)
+COL: documento | varchar(130)
+COL: observacoes | text
+COL: google_id | varchar(100)
+
+--- TABLE: google_auth ---
+COL: id | int
+COL: access_token | text
+COL: refresh_token | text
+COL: expiry_date | bigint
+COL: updated_at | datetime(3)
+
+--- TABLE: itens ---
+COL: id_item | int
+COL: id_pedido | int
+COL: id_cliente | int
+COL: produto_id | int
+COL: altura | decimal(10,3)
+COL: largura | decimal(10,3)
+COL: comprimento | decimal(10,3)
+COL: quantidade | decimal(10,3)
+COL: valor_unitario | decimal(10,2)
+COL: valor_total | decimal(10,2)
+COL: observacoes | text
+COL: formato | varchar(10)
+COL: produto_sc | varchar(200)
+COL: categoria | int
+COL: produto | int
+COL: descricao | int
+COL: espessura | int
+COL: acabamento | int
+COL: acabamento2 | varchar(300)
+COL: m2 | varchar(20)
+
+--- TABLE: pedidos ---
+COL: id_pedido | int
+COL: id_cliente | int
+COL: data_pedido | timestamp
+COL: titulo | varchar(100)
+COL: subtotal | decimal(10,2)
+COL: total | decimal(10,2)
+COL: status | int
+COL: medicao_dia | varchar(20)
+COL: medicao_turno | varchar(11)
+COL: instalacao_dia | varchar(20)
+COL: instalacao_turno | varchar(11)
+COL: funcionario | int
+COL: desconto | decimal(10,2)
+COL: valor_pago | decimal(10,2)
+COL: saldo | decimal(10,2)
+COL: forma_pagamento | int
+COL: observacoes | text
+COL: newtemper | varchar(50)
+COL: prazo | int
+COL: parcelamento | int
+COL: avista | int
+COL: entrega | int
+COL: descontopix | varchar(20)
+
+--- TABLE: produto_imagens ---
+COL: id | int
+COL: produto_id | int
+COL: url | text
+COL: principal | tinyint(1)
+
+--- TABLE: produto_variacoes ---
+COL: id | int
+COL: produto_id | int
+COL: nome | varchar(100)
+COL: opcao | varchar(100)
+COL: valor_acrescimo | decimal(10,2)
+COL: tipo_acrescimo | varchar(20)
+
+--- TABLE: produtos ---
+COL: id | int
+COL: categoria_id | int
+COL: nome | varchar(191)
+COL: descricao | text
+COL: ncm | varchar(50)
+COL: sku | varchar(100)
+COL: preco_venda | decimal(10,2)
+COL: unidade_medida | varchar(20)
+COL: largura_maxima | decimal(10,2)
+COL: altura_maxima | decimal(10,2)
+COL: comprimento_maximo | decimal(10,2)
+COL: status | tinyint(1)
+COL: criado_em | datetime(3)
+

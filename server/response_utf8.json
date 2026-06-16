@@ -1,0 +1,203 @@
+{
+    "id_pedido":  50641,
+    "id_cliente":  10194,
+    "data_pedido":  "2026-03-23T16:59:21.000Z",
+    "titulo":  null,
+    "subtotal":  5372.16,
+    "total":  5372.16,
+    "status":  4,
+    "desconto":  0,
+    "valor_pago":  0,
+    "saldo":  5372.16,
+    "observacoes":  "",
+    "forma_pagamento":  null,
+    "prazo":  null,
+    "parcelamento":  null,
+    "entrega":  null,
+    "descontopix":  null,
+    "cliente_nome":  "Ellen Amadeu de Oliveira",
+    "cliente":  {
+                    "id_cliente":  10194,
+                    "nome":  "Ellen Amadeu de Oliveira",
+                    "contato":  null,
+                    "ddd":  null,
+                    "telefone":  "21983246323",
+                    "email":  "",
+                    "endereco":  "Rua Plinio Barreto, 221",
+                    "bairro":  "Jardim America",
+                    "cep":  ""
+                },
+    "itens":  [
+                  {
+                      "id_item":  82260,
+                      "id_pedido":  50641,
+                      "id_cliente":  10194,
+                      "produto_id":  4,
+                      "altura":  "1",
+                      "largura":  "1",
+                      "comprimento":  "0",
+                      "quantidade":  "1",
+                      "valor_unitario":  689.99,
+                      "valor_total":  689.99,
+                      "observacoes":  "",
+                      "variacoes":  null,
+                      "formato":  "NODE",
+                      "produto_sc":  null,
+                      "categoria":  null,
+                      "produto":  null,
+                      "descricao":  null,
+                      "espessura":  null,
+                      "acabamento":  null,
+                      "acabamento2":  null,
+                      "m2":  null,
+                      "produto_nome":  "Box Blindex Frontal Com Vidro Temperado 8mm",
+                      "produto_sku":  "BFI"
+                  },
+                  {
+                      "id_item":  82261,
+                      "id_pedido":  50641,
+                      "id_cliente":  10194,
+                      "produto_id":  4,
+                      "altura":  "1",
+                      "largura":  "1",
+                      "comprimento":  "0",
+                      "quantidade":  "1",
+                      "valor_unitario":  929.99,
+                      "valor_total":  929.99,
+                      "observacoes":  "",
+                      "variacoes":  {
+                                        "Cor dos acabamentos":  {
+                                                                    "id":  11,
+                                                                    "nome":  "Cor dos acabamentos",
+                                                                    "opcao":  "Branco",
+                                                                    "produto_id":  4,
+                                                                    "tipo_acrescimo":  "VALOR",
+                                                                    "valor_acrescimo":  "240"
+                                                                }
+                                    },
+                      "formato":  "NODE",
+                      "produto_sc":  null,
+                      "categoria":  null,
+                      "produto":  null,
+                      "descricao":  null,
+                      "espessura":  null,
+                      "acabamento":  null,
+                      "acabamento2":  null,
+                      "m2":  null,
+                      "produto_nome":  "Box Blindex Frontal Com Vidro Temperado 8mm",
+                      "produto_sku":  "BFI"
+                  },
+                  {
+                      "id_item":  82262,
+                      "id_pedido":  50641,
+                      "id_cliente":  10194,
+                      "produto_id":  6,
+                      "altura":  "1.8",
+                      "largura":  "0.9",
+                      "comprimento":  "0.9",
+                      "quantidade":  "1",
+                      "valor_unitario":  1162.4,
+                      "valor_total":  1162.4,
+                      "observacoes":  "",
+                      "variacoes":  {
+                                        "Cor dos Acabamentos":  {
+                                                                    "id":  15,
+                                                                    "nome":  "Cor dos Acabamentos",
+                                                                    "opcao":  "Branco",
+                                                                    "produto_id":  6,
+                                                                    "tipo_acrescimo":  "VALOR",
+                                                                    "valor_acrescimo":  "320"
+                                                                }
+                                    },
+                      "formato":  "NODE",
+                      "produto_sc":  null,
+                      "categoria":  null,
+                      "produto":  null,
+                      "descricao":  null,
+                      "espessura":  null,
+                      "acabamento":  null,
+                      "acabamento2":  null,
+                      "m2":  null,
+                      "produto_nome":  "Box de Canto com Vidro Incolor 8mm",
+                      "produto_sku":  "BCINC"
+                  },
+                  {
+                      "id_item":  82263,
+                      "id_pedido":  50641,
+                      "id_cliente":  10194,
+                      "produto_id":  7,
+                      "altura":  "1.8",
+                      "largura":  "0.9",
+                      "comprimento":  "0",
+                      "quantidade":  "1",
+                      "valor_unitario":  729.8,
+                      "valor_total":  729.8,
+                      "observacoes":  "",
+                      "variacoes":  {
+                                        "Cor dos Acabamento":  {
+                                                                   "id":  18,
+                                                                   "nome":  "Cor dos Acabamento",
+                                                                   "opcao":  "Branco",
+                                                                   "produto_id":  7,
+                                                                   "tipo_acrescimo":  "VALOR",
+                                                                   "valor_acrescimo":  "260"
+                                                               }
+                                    },
+                      "formato":  "NODE",
+                      "produto_sc":  null,
+                      "categoria":  null,
+                      "produto":  null,
+                      "descricao":  null,
+                      "espessura":  null,
+                      "acabamento":  null,
+                      "acabamento2":  null,
+                      "m2":  null,
+                      "produto_nome":  "Box Open Incolor 8mm",
+                      "produto_sku":  "BOINC"
+                  },
+                  {
+                      "id_item":  82264,
+                      "id_pedido":  50641,
+                      "id_cliente":  1,
+                      "produto_id":  4,
+                      "altura":  "1",
+                      "largura":  "1",
+                      "comprimento":  "0",
+                      "quantidade":  "2",
+                      "valor_unitario":  929.99,
+                      "valor_total":  1859.98,
+                      "observacoes":  "Test Edit",
+                      "variacoes":  {
+                                        "Test":  {
+                                                     "id":  1,
+                                                     "opcao":  "B"
+                                                 },
+                                        "Cor dos acabamentos":  {
+                                                                    "id":  12,
+                                                                    "nome":  "Cor dos acabamentos",
+                                                                    "opcao":  "Preto",
+                                                                    "produto_id":  4,
+                                                                    "tipo_acrescimo":  "VALOR",
+                                                                    "valor_acrescimo":  "240"
+                                                                }
+                                    },
+                      "formato":  "NODE",
+                      "produto_sc":  null,
+                      "categoria":  null,
+                      "produto":  null,
+                      "descricao":  null,
+                      "espessura":  null,
+                      "acabamento":  null,
+                      "acabamento2":  null,
+                      "m2":  null,
+                      "produto_nome":  "Box Blindex Frontal Com Vidro Temperado 8mm",
+                      "produto_sku":  "BFI"
+                  }
+              ],
+    "agendamentos":  [
+
+                     ],
+    "pagamentos":  [
+
+                   ]
+}

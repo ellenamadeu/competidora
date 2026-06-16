@@ -1,0 +1,318 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = "mysql://competid4c3793e0_loja:Eao%40031626@a16-asgard3.hospedagemuolhost.com.br:3306/competid4c3793e0_competidor1_1"
+}
+
+model Categoria {
+  id               Int          @id @default(autoincrement())
+  categoria_pai_id Int?
+  nome             String       @db.VarChar(255)
+  slug             String       @db.VarChar(255)
+  criado_em        DateTime?    @default(now()) @db.DateTime(0)
+  acabamentos      Acabamento[]
+  categoria_pai    Categoria?   @relation("Subcategorias", fields: [categoria_pai_id], references: [id], onUpdate: NoAction, map: "categorias_ibfk_1")
+  subcategorias    Categoria[]  @relation("Subcategorias")
+  produtos         Produto[]
+
+  @@index([categoria_pai_id], map: "categoria_pai_id")
+  @@map("categorias")
+}
+
+model Produto {
+  id                 Int          @id @default(autoincrement())
+  categoria_id       Int?
+  nome               String       @db.VarChar(255)
+  descricao          String?      @db.Text
+  ncm                String?      @db.VarChar(50)
+  sku                String?      @db.VarChar(100)
+  preco_venda        Decimal      @db.Decimal(10, 2)
+  unidade_medida     String       @db.VarChar(20)
+  largura_maxima     Decimal?     @db.Decimal(10, 2)
+  altura_maxima      Decimal?     @db.Decimal(10, 2)
+  comprimento_maximo Decimal?     @db.Decimal(10, 2)
+  status             Boolean?     @default(true)
+  criado_em          DateTime?    @default(now()) @db.DateTime(0)
+  acabamentos        Acabamento[]
+  categoria          Categoria?   @relation(fields: [categoria_id], references: [id], onUpdate: NoAction, map: "produtos_ibfk_1")
+
+  @@index([categoria_id], map: "categoria_id")
+  @@map("produtos")
+}
+
+model Acabamento {
+  id             Int        @id @default(autoincrement())
+  categoria_id   Int?
+  produto_id     Int?
+  nome           String     @db.VarChar(255)
+  tipo_acrescimo String     @db.VarChar(20)
+  valor          Decimal    @db.Decimal(10, 2)
+  ativo          Boolean?   @default(false)
+  categoria      Categoria? @relation(fields: [categoria_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "acabamentos_ibfk_1")
+  produto        Produto?   @relation(fields: [produto_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "acabamentos_ibfk_2")
+
+  @@index([categoria_id], map: "categoria_id")
+  @@index([produto_id], map: "produto_id")
+  @@map("acabamentos")
+}
+
+model agendamento {
+  id_agendamento     Int      @id @default(autoincrement())
+  id_pedido          Int
+  data_agendamento   DateTime @db.Date
+  hora_agendamento   Int
+  ordem              Int
+  responsavel        Int
+  instrucao          String?  @db.Text
+  status_agendamento Int      @default(0)
+}
+
+model agendamento_hora {
+  id_aghora Int    @id @default(autoincrement())
+  hora      String @db.VarChar(10)
+}
+
+model agendamento_ordem {
+  id_ordem Int    @id @default(autoincrement())
+  ordem    String @db.VarChar(50)
+}
+
+model caixa_entrada {
+  id_caixa_entrada BigInt   @id @default(autoincrement())
+  id_pedido        Int
+  data             DateTime @default(now()) @db.Timestamp(0)
+  forma_pagamento  Int
+  valor            Decimal  @db.Decimal(10, 2)
+}
+
+model caixa_saida {
+  id_caixa_saida  Int      @id @default(autoincrement())
+  data            DateTime @db.Timestamp(0)
+  id_fornecedor   Int
+  forma_pagamento Int
+  valor           Decimal  @db.Decimal(10, 2)
+}
+
+model clientes {
+  id_cliente  Int     @id @default(autoincrement())
+  nome        String  @db.VarChar(150)
+  contato     String? @db.VarChar(30)
+  email       String? @db.VarChar(150)
+  ddd         Int?    @db.TinyInt
+  telefone    String? @db.VarChar(150)
+  telefone2   String? @db.VarChar(150)
+  telefone3   String? @db.VarChar(150)
+  endereco    String? @db.Text
+  bairro      String? @db.VarChar(150)
+  cep         String? @db.VarChar(150)
+  referencias String? @db.VarChar(130)
+  documento   String? @db.VarChar(130)
+  observacoes String? @db.Text
+}
+
+model desp_status {
+  id_desp_status Int     @id @default(autoincrement())
+  desp_status    String? @db.VarChar(100)
+}
+
+model desp_tipo {
+  id_desp_tipo Int    @id @default(autoincrement())
+  desp_tipo    String @db.VarChar(100)
+}
+
+model despesas {
+  id_despesa              Int       @id @default(autoincrement())
+  id_fornecedor           Int
+  data_despesa            DateTime  @default(now()) @db.Timestamp(0)
+  vencimento              DateTime? @db.Date
+  tipo_despesa            Int?
+  forma_pagamento_despesa Int?
+  status_despesa          Int?
+  total_despesa           Float?
+  valor_pago_despesa      Float?
+}
+
+model despesas_itens {
+  id_item_despesa Int     @id @default(autoincrement())
+  id_despesa      Int
+  descricao       String  @db.VarChar(300)
+  altura          String? @db.VarChar(20)
+  largura         String? @db.VarChar(20)
+  quantidade      String? @db.VarChar(10)
+  valor_unitario  Float?
+  valor_total     Float?
+}
+
+model financeiro_despesas {
+  id             Int       @id @default(autoincrement())
+  id_fornecedor  Int
+  descricao      String    @db.VarChar(500)
+  valor          Decimal   @db.Decimal(10, 2)
+  data_pagamento DateTime  @db.Date
+  criado_em      DateTime? @default(now()) @db.Timestamp(0)
+
+  @@index([id_fornecedor], map: "id_fornecedor")
+}
+
+model fornecedor_categoria {
+  id_categorias Int    @id @default(autoincrement())
+  categoria     String @db.VarChar(50)
+}
+
+model fornecedores {
+  id_fornecedor Int     @id @default(autoincrement())
+  categoria     Int?
+  nome          String  @db.VarChar(100)
+  contato       String? @db.VarChar(50)
+  ddd           Int?
+  telefone1     String? @db.VarChar(20)
+  telefone2     String? @db.VarChar(20)
+  telefone3     String? @db.VarChar(20)
+  endereco      String? @db.VarChar(80)
+  bairro        String? @db.VarChar(50)
+  referencia    String? @db.VarChar(50)
+  cep           String? @db.VarChar(50)
+  email         String? @db.VarChar(50)
+  cnpj          String? @db.VarChar(20)
+  ie            String? @db.VarChar(30)
+  observacoes   String? @db.Text
+}
+
+model item_acabamento {
+  id_acabamento Int    @id @default(autoincrement())
+  id_categoria  Int
+  acabamento    String @db.VarChar(50)
+}
+
+model item_categoria {
+  id_categoria Int    @id @default(autoincrement())
+  categoria    String @db.VarChar(20)
+}
+
+model item_descricao {
+  id_descricao Int    @id @default(autoincrement())
+  id_categoria Int
+  descricao    String @db.VarChar(50)
+}
+
+model item_espessura {
+  id_espessura Int    @id @default(autoincrement())
+  espessura    String @db.VarChar(10)
+}
+
+model item_produto {
+  id_produto   Int    @id @default(autoincrement())
+  id_categoria Int
+  produto      String @db.VarChar(100)
+}
+
+model itens {
+  id_item        Int      @id @default(autoincrement())
+  id_cliente     Int?
+  id_pedido      Int?
+  produto_sc     String?  @db.VarChar(200)
+  categoria      Int?
+  produto        Int?
+  descricao      Int?
+  espessura      Int?
+  acabamento     Int?
+  acabamento2    String?  @db.VarChar(300)
+  altura         String   @db.VarChar(10)
+  largura        String   @db.VarChar(30)
+  quantidade     String   @db.VarChar(20)
+  m2             Decimal? @db.Decimal(10, 2)
+  valor_unitario Decimal? @db.Decimal(10, 2)
+  valor_total    Decimal? @db.Decimal(10, 2)
+}
+
+model orc_entrega {
+  id_entrega Int    @id @default(autoincrement())
+  entrega    String @db.VarChar(30)
+}
+
+model orc_funcionarios {
+  id_funcionario     Int     @id @default(autoincrement())
+  status             Int?
+  acesso             Int?
+  login              String? @db.VarChar(100)
+  senha              String? @db.VarChar(100)
+  nome               String? @db.VarChar(50)
+  sobrenome          String? @db.VarChar(80)
+  telefone1          String? @db.VarChar(10)
+  telefone2          String? @db.VarChar(10)
+  telefone3          String? @db.VarChar(10)
+  endereco           String? @db.VarChar(80)
+  bairro             String? @db.VarChar(50)
+  data_nascimento    String? @db.VarChar(20)
+  filhos             Int?
+  rg                 String? @db.VarChar(20)
+  cpf                String? @db.VarChar(20)
+  cat                String? @db.VarChar(30)
+  pis                String? @db.VarChar(30)
+  data_entrada       String? @db.VarChar(20)
+  data_saida         String? @db.VarChar(20)
+  salario_beneficios Float?
+  salario            Float?
+  funcao             String? @db.VarChar(50)
+  observacoes        String? @db.Text
+}
+
+model orc_pagamento {
+  id_pagamento Int     @id @default(autoincrement())
+  pagamento    String? @db.VarChar(50)
+}
+
+model orc_status {
+  id_status Int    @id @default(autoincrement())
+  status    String @db.VarChar(30)
+}
+
+model pedidos {
+  id_pedido        Int       @id @default(autoincrement())
+  id_cliente       Int
+  data_pedido      DateTime? @default(now()) @db.Timestamp(0)
+  titulo           String?   @db.VarChar(100)
+  subtotal         Decimal?  @db.Decimal(10, 2)
+  total            Decimal?  @db.Decimal(10, 2)
+  status           Int?
+  medicao_dia      String?   @db.VarChar(20)
+  medicao_turno    String?   @db.VarChar(11)
+  instalacao_dia   String?   @db.VarChar(20)
+  instalacao_turno String?   @db.VarChar(11)
+  funcionario      Int?
+  desconto         Decimal?  @db.Decimal(10, 2)
+  valor_pago       Decimal?  @db.Decimal(10, 2)
+  saldo            Decimal?  @db.Decimal(10, 2)
+  forma_pagamento  Int?
+  observacoes      String?   @db.Text
+  newtemper        String?   @db.VarChar(50)
+  prazo            Int?
+  parcelamento     Int?
+  avista           Int?
+  entrega          Int?
+  descontopix      String?   @db.VarChar(20)
+}
+
+model salarios {
+  id_salario     Int     @id @default(autoincrement())
+  id_funcionario Int?
+  mes            String? @db.VarChar(11)
+  ano            String? @db.VarChar(11)
+  salario_base   Float?
+  salario_pago   Float?
+}
+
+model salarios_itens {
+  id_item    Int     @id @default(autoincrement())
+  id_salario Int
+  data       String? @db.VarChar(20)
+  tipo       Int?
+  descricao  String? @db.VarChar(50)
+  desconto   Float?
+  adicional  Float?
+}
+
+

@@ -1,0 +1,32 @@
+[
+  {
+    "id": 4,
+    "categoria_id": 4,
+    "nome": "Box Blindex Frontal Com Vidro Temperado 8mm",
+    "descricao": "",
+    "ncm": "",
+    "sku": "BFI",
+    "preco_venda": "689.99",
+    "unidade_medida": "M2",
+    "largura_maxima": null,
+    "altura_maxima": null,
+    "comprimento_maximo": null,
+    "status": true,
+    "criado_em": "2026-03-23T13:46:31.989Z"
+  },
+  {
+    "id": 6,
+    "categoria_id": 5,
+    "nome": "Box de Canto com Vidro Incolor 8mm",
+    "descricao": "",
+    "ncm": "",
+    "sku": "BCINC",
+    "preco_venda": "260",
+    "unidade_medida": "M3",
+    "largura_maxima": null,
+    "altura_maxima": null,
+    "comprimento_maximo": null,
+    "status": true,
+    "criado_em": "2026-03-25T12:34:01.955Z"
+  }
+]

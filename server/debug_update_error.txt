@@ -1,0 +1,32 @@
+
+--- ERROR UPDATING ORDER (2026-03-25T18:29:49.888Z) ---
+Order ID: NaN
+Payload: undefined
+Error: Cannot convert undefined or null to object
+Stack: TypeError: Cannot convert undefined or null to object
+    at Object.entries (<anonymous>)
+    at update (C:\Users\venda\OneDrive\Documentos\GitHub\competidora\server\src\controllers\PedidoController.ts:144:41)
+    at Layer.handleRequest (C:\Users\venda\OneDrive\Documentos\GitHub\competidora\server\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\venda\OneDrive\Documentos\GitHub\competidora\server\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\venda\OneDrive\Documentos\GitHub\competidora\server\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\venda\OneDrive\Documentos\GitHub\competidora\server\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\venda\OneDrive\Documentos\GitHub\competidora\server\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\venda\OneDrive\Documentos\GitHub\competidora\server\node_modules\router\index.js:295:15
+    at param (C:\Users\venda\OneDrive\Documentos\GitHub\competidora\server\node_modules\router\index.js:600:14)
+    at param (C:\Users\venda\OneDrive\Documentos\GitHub\competidora\server\node_modules\router\index.js:610:14)
+
+--- ERROR UPDATING ORDER (2026-03-25T18:30:33.723Z) ---
+Order ID: NaN
+Payload: undefined
+Error: Cannot convert undefined or null to object
+Stack: TypeError: Cannot convert undefined or null to object
+    at Object.entries (<anonymous>)
+    at update (C:\Users\venda\OneDrive\Documentos\GitHub\competidora\server\src\controllers\PedidoController.ts:144:41)
+    at Layer.handleRequest (C:\Users\venda\OneDrive\Documentos\GitHub\competidora\server\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\venda\OneDrive\Documentos\GitHub\competidora\server\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\venda\OneDrive\Documentos\GitHub\competidora\server\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\venda\OneDrive\Documentos\GitHub\competidora\server\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\venda\OneDrive\Documentos\GitHub\competidora\server\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\venda\OneDrive\Documentos\GitHub\competidora\server\node_modules\router\index.js:295:15
+    at param (C:\Users\venda\OneDrive\Documentos\GitHub\competidora\server\node_modules\router\index.js:600:14)
+    at param (C:\Users\venda\OneDrive\Documentos\GitHub\competidora\server\node_modules\router\index.js:610:14)

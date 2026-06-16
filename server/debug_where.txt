@@ -1,0 +1,22 @@
+Filtro applied: {
+  "categoria_id": {
+    "in": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  }
+}
+Filtro applied: {
+  "categoria_id": {
+    "in": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  }
+}

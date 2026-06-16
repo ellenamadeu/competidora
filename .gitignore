@@ -1,0 +1,6 @@
+.env
+.env.local
+.vscode/
+vendor/
+node_modules/
+*.log

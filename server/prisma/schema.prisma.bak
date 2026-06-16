@@ -1,0 +1,215 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = "mysql://competid4c3793e0_loja:Eao%40031626@a16-asgard3.hospedagemuolhost.com.br:3306/competid4c3793e0_node"
+}
+
+model Categoria {
+  id               Int          @id @default(autoincrement())
+  categoria_pai_id Int?
+  nome             String
+  slug             String
+  criado_em        DateTime     @default(now())
+  acabamentos      Acabamento[]
+  categoria_pai    Categoria?   @relation("Subcategorias", fields: [categoria_pai_id], references: [id])
+  subcategorias    Categoria[]  @relation("Subcategorias")
+  produtos         Produto[]
+
+  @@index([categoria_pai_id], map: "categorias_categoria_pai_id_fkey")
+  @@map("categorias")
+}
+
+model Produto {
+  id                 Int               @id @default(autoincrement())
+  categoria_id       Int?
+  nome               String
+  descricao          String?           @db.Text
+  ncm                String?           @db.VarChar(50)
+  sku                String?           @db.VarChar(100)
+  preco_venda        Decimal           @db.Decimal(10, 2)
+  unidade_medida     String            @db.VarChar(20)
+  largura_maxima     Decimal?          @db.Decimal(10, 2)
+  altura_maxima      Decimal?          @db.Decimal(10, 2)
+  comprimento_maximo Decimal?          @db.Decimal(10, 2)
+  status             Boolean           @default(true)
+  criado_em          DateTime          @default(now())
+  acabamentos        Acabamento[]
+  imagens            ProdutoImagem[]
+  variacoes          ProdutoVariacao[]
+  categoria          Categoria?        @relation(fields: [categoria_id], references: [id])
+
+  @@index([categoria_id], map: "produtos_categoria_id_fkey")
+  @@map("produtos")
+}
+
+model ProdutoImagem {
+  id         Int     @id @default(autoincrement())
+  produto_id Int
+  url        String  @db.Text
+  principal  Boolean @default(false)
+  produto    Produto @relation(fields: [produto_id], references: [id], onDelete: Cascade)
+
+  @@index([produto_id], map: "produto_imagens_produto_id_fkey")
+  @@map("produto_imagens")
+}
+
+model ProdutoVariacao {
+  id              Int     @id @default(autoincrement())
+  produto_id      Int
+  nome            String  @db.VarChar(100)
+  opcao           String  @db.VarChar(100)
+  valor_acrescimo Decimal @default(0.00) @db.Decimal(10, 2)
+  tipo_acrescimo  String  @default("VALOR") @db.VarChar(20)
+  produto         Produto @relation(fields: [produto_id], references: [id], onDelete: Cascade)
+
+  @@index([produto_id], map: "produto_variacoes_produto_id_fkey")
+  @@map("produto_variacoes")
+}
+
+model Acabamento {
+  id             Int        @id @default(autoincrement())
+  categoria_id   Int?
+  produto_id     Int?
+  nome           String
+  tipo_acrescimo String     @db.VarChar(20)
+  valor          Decimal    @db.Decimal(10, 2)
+  ativo          Boolean    @default(false)
+  categoria      Categoria? @relation(fields: [categoria_id], references: [id])
+  produto        Produto?   @relation(fields: [produto_id], references: [id])
+
+  @@index([categoria_id], map: "acabamentos_categoria_id_fkey")
+  @@index([produto_id], map: "acabamentos_produto_id_fkey")
+  @@map("acabamentos")
+}
+
+model Cliente {
+  id          Int     @id @default(autoincrement()) @map("id_cliente")
+  nome        String  @db.VarChar(150)
+  contato     String? @db.VarChar(30)
+  email       String? @db.VarChar(150)
+  ddd         Int?    @db.TinyInt
+  telefone    String? @db.VarChar(150)
+  telefone2   String? @db.VarChar(150)
+  telefone3   String? @db.VarChar(150)
+  endereco    String? @db.Text
+  bairro      String? @db.VarChar(150)
+  cep         String? @db.VarChar(150)
+  referencias String? @db.VarChar(130)
+  documento   String? @db.VarChar(130)
+  observacoes String? @db.Text
+  google_id   String? @db.VarChar(100)
+
+  @@map("clientes")
+}
+
+model Pedido {
+  id               Int       @id @default(autoincrement()) @map("id_pedido")
+  id_cliente       Int
+  data_pedido      DateTime? @default(now()) @db.Timestamp(0)
+  titulo           String?   @db.VarChar(100)
+  subtotal         Decimal?  @db.Decimal(10, 2)
+  total            Decimal?  @db.Decimal(10, 2)
+  status           Int?
+  medicao_dia      String?   @db.VarChar(20)
+  medicao_turno    String?   @db.VarChar(11)
+  instalacao_dia   String?   @db.VarChar(20)
+  instalacao_turno String?   @db.VarChar(11)
+  funcionario      Int?
+  desconto         Decimal?  @db.Decimal(10, 2)
+  valor_pago       Decimal?  @db.Decimal(10, 2)
+  saldo            Decimal?  @db.Decimal(10, 2)
+  forma_pagamento  Int?
+  observacoes      String?   @db.Text
+  newtemper        String?   @db.VarChar(50)
+  prazo            Int?
+  parcelamento     Int?
+  avista           Int?
+  entrega          Int?
+  descontopix      String?   @db.VarChar(20)
+
+  @@index([id_cliente], map: "pedidos_id_cliente_fkey")
+  @@map("pedidos")
+}
+
+model ItemPedido {
+  id                Int      @id @default(autoincrement()) @map("id_item")
+  id_pedido         Int
+  id_cliente        Int
+  produto_id        Int?
+  altura            Decimal? @db.Decimal(10, 3)
+  largura           Decimal? @db.Decimal(10, 3)
+  comprimento       Decimal? @db.Decimal(10, 3)
+  quantidade        Decimal? @db.Decimal(10, 3)
+  valor_unitario    Decimal? @db.Decimal(10, 2)
+  valor_total       Decimal? @db.Decimal(10, 2)
+  observacoes       String?  @db.Text
+  variacoes         Json?
+  formato           String   @default("NODE") @db.VarChar(10)
+  produto_sc        String?  @db.VarChar(200)
+  categoria_legacy  Int?     @map("categoria")
+  produto_legacy    Int?     @map("produto")
+  descricao_legacy  Int?     @map("descricao")
+  espessura_legacy  Int?     @map("espessura")
+  acabamento_legacy Int?     @map("acabamento")
+  acabamento2       String?  @db.VarChar(300)
+  m2_legacy         String?  @map("m2") @db.VarChar(20)
+
+  @@index([id_pedido], map: "itens_id_pedido_fkey")
+  @@index([produto_id], map: "itens_produto_id_fkey")
+  @@map("itens")
+}
+
+model Agendamento {
+  id                 Int              @id @default(autoincrement()) @map("id_agendamento")
+  id_pedido          Int
+  data_agendamento   DateTime?        @db.Date
+  hora_id            Int?             @map("hora_agendamento")
+  ordem_id           Int?             @map("ordem")
+  responsavel_id     Int?             @map("responsavel")
+  instrucao          String?          @db.Text
+  status_agendamento Int?
+  hora               AgendamentoHora? @relation(fields: [hora_id], references: [id])
+  ordem              AgendamentoOrdem? @relation(fields: [ordem_id], references: [id])
+
+  @@index([id_pedido], map: "agendamento_id_pedido_fkey")
+  @@map("agendamento")
+}
+
+model AgendamentoHora {
+  id           Int           @id @default(autoincrement()) @map("id_aghora")
+  hora         String        @db.VarChar(50)
+  agendamentos Agendamento[]
+
+  @@map("agendamento_hora")
+}
+
+model AgendamentoOrdem {
+  id           Int           @id @default(autoincrement()) @map("id_ordem")
+  ordem        String        @db.VarChar(100)
+  agendamentos Agendamento[]
+
+  @@map("agendamento_ordem")
+}
+
+model GoogleAuth {
+  id            Int      @id @default(1)
+  access_token  String   @db.Text
+  refresh_token String   @db.Text
+  expiry_date   BigInt?
+  updated_at    DateTime @default(now())
+
+  @@map("google_auth")
+}
+
+model CaixaEntrada {
+  id              BigInt   @id @default(autoincrement()) @map("id_caixa_entrada")
+  id_pedido       Int
+  data            DateTime @default(now()) @db.Timestamp(0)
+  forma_pagamento Int
+  valor           Float
+
+  @@map("caixa_entrada")
+}
