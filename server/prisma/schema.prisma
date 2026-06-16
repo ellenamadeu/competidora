@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://competid4c3793e0_loja:Eao%40031626@a16-asgard3.hospedagemuolhost.com.br:3306/competid4c3793e0_node"
+  url      = env("DATABASE_URL")
 }
 
 model Categoria {
